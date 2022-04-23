@@ -8,26 +8,43 @@ namespace MyFirstConsoleApplication
         {
             //get window length from user and convert to a double
             double width;
-            Console.WriteLine("Please enter the length of the window in feet");
-            var widthString = Console.ReadLine();
             
-            while (!double.TryParse(widthString, out width))
+            while (true)
             {
                 Console.WriteLine("Please enter the length of the window in feet");
-                widthString = Console.ReadLine();
+                var widthString = Console.ReadLine();
+                if (!double.TryParse(widthString, out width))
+                {
+                    continue;
+                }
+
+                if (!(width > 0))
+                {
+                    continue;
+                }
+
+                break;
             }
             
             //get window height from user and convert to a double
             double height;
-            Console.WriteLine("Please enter the height of the window in feet");
-            var heightString = Console.ReadLine();
-            
-            while (!double.TryParse(heightString, out height))
+            while (true)
             {
                 Console.WriteLine("Please enter the height of the window in feet");
-                heightString = Console.ReadLine();
+                var heightString = Console.ReadLine();
+                if (!double.TryParse(heightString, out height))
+                {
+                    continue;
+                }
+
+                if (!(height > 0))
+                {
+                    continue;
+                }
+
+                break;
             }
-            
+
             //calculate the area for glass and perimeter for wood frame and output to console
             var woodLength = 2 * (width + height) * 3.25;
             var glassArea = 2 * (width * height);
