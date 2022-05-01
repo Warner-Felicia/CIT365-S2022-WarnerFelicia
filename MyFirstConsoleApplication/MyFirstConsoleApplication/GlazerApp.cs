@@ -26,11 +26,14 @@ namespace MyFirstConsoleApplication
             {
                 Console.WriteLine($"Please enter the {dimension} of the window in feet");
                 var numberString = Console.ReadLine();
+                
+                //make sure number is double
                 if (!double.TryParse(numberString, out number))
                 {
                     continue;
                 }
 
+                //make sure number is not negative
                 if (!(number > 0))
                 {
                     continue;
