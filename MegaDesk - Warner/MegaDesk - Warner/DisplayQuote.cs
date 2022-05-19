@@ -22,12 +22,12 @@ namespace MegaDesk___Warner
         {
             var quote = (DeskQuote)AddQuote.FormData;
             quoteDate.Text = quote.Date.ToString("MM/dd/yyyy");
-            basePrice.Text = quote.BasePrice.ToString(CultureInfo.CurrentCulture);
-            areaPrice.Text = quote.AreaPrice.ToString(CultureInfo.CurrentCulture);
-            drawersPrice.Text = quote.DrawersPrice.ToString(CultureInfo.CurrentCulture);
-            materialsPrice.Text = quote.MaterialsPrice.ToString(CultureInfo.CurrentCulture);
-            rushOrderPrice.Text = quote.RushOrderPrice.ToString(CultureInfo.CurrentCulture);
-            totalPrice.Text = quote.TotalPrice.ToString(CultureInfo.CurrentCulture);
+            basePrice.Text = quote.BasePrice.ToString(CultureInfo.InvariantCulture);
+            areaPrice.Text = quote.AreaPrice.ToString(CultureInfo.InvariantCulture);
+            drawersPrice.Text = quote.DrawersPrice.ToString(CultureInfo.InvariantCulture);
+            materialsPrice.Text = quote.MaterialsPrice.ToString(CultureInfo.InvariantCulture);
+            rushOrderPrice.Text = quote.RushOrderPrice.ToString(CultureInfo.InvariantCulture);
+            totalPrice.Text = quote.TotalPrice.ToString(CultureInfo.InvariantCulture);
 
         }
     }

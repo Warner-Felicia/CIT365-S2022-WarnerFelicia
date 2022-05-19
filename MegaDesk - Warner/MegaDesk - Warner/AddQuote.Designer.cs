@@ -32,21 +32,23 @@
             this.customerName = new System.Windows.Forms.Label();
             this.customerNameInput = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.widthInput = new System.Windows.Forms.TextBox();
+            this.materialInput = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.depthInput = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.drawersInput = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.materialInput = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.rushOrderInput = new System.Windows.Forms.ComboBox();
+            this.widthInput = new System.Windows.Forms.NumericUpDown();
+            this.depthInput = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.addNewQuote = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.widthInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.depthInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,24 +69,25 @@
             this.customerNameInput.Name = "customerNameInput";
             this.customerNameInput.Size = new System.Drawing.Size(100, 20);
             this.customerNameInput.TabIndex = 1;
+            this.customerNameInput.Validating += new System.ComponentModel.CancelEventHandler(this.NameInputValidating);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.widthInput, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.materialInput, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.customerName, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.customerNameInput, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.depthInput, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.drawersInput, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.materialInput, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.rushOrderInput, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.widthInput, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.depthInput, 1, 2);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(192, 123);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
@@ -97,13 +100,24 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(417, 238);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // widthInput
+            // materialInput
             // 
-            this.widthInput.Location = new System.Drawing.Point(211, 42);
-            this.widthInput.Name = "widthInput";
-            this.widthInput.Size = new System.Drawing.Size(94, 20);
-            this.widthInput.TabIndex = 3;
-            this.widthInput.Validating += new System.ComponentModel.CancelEventHandler(this.widthInput_Validating);
+            this.materialInput.Font = new System.Drawing.Font("Rockwell", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.materialInput.FormattingEnabled = true;
+            this.materialInput.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
+            this.materialInput.Location = new System.Drawing.Point(211, 159);
+            this.materialInput.Name = "materialInput";
+            this.materialInput.Size = new System.Drawing.Size(121, 24);
+            this.materialInput.TabIndex = 5;
+            this.materialInput.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxInput_Validating);
             // 
             // label1
             // 
@@ -126,14 +140,6 @@
             this.label2.Size = new System.Drawing.Size(95, 39);
             this.label2.TabIndex = 4;
             this.label2.Text = "Desk Depth";
-            // 
-            // depthInput
-            // 
-            this.depthInput.Location = new System.Drawing.Point(211, 81);
-            this.depthInput.Name = "depthInput";
-            this.depthInput.Size = new System.Drawing.Size(94, 20);
-            this.depthInput.TabIndex = 5;
-            this.depthInput.Validating += new System.ComponentModel.CancelEventHandler(this.depthInput_Validating);
             // 
             // label4
             // 
@@ -162,7 +168,8 @@
             this.drawersInput.Location = new System.Drawing.Point(211, 120);
             this.drawersInput.Name = "drawersInput";
             this.drawersInput.Size = new System.Drawing.Size(121, 24);
-            this.drawersInput.TabIndex = 9;
+            this.drawersInput.TabIndex = 4;
+            this.drawersInput.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxInput_Validating);
             // 
             // label5
             // 
@@ -174,21 +181,6 @@
             this.label5.Size = new System.Drawing.Size(130, 39);
             this.label5.TabIndex = 10;
             this.label5.Text = "Surface Material";
-            // 
-            // materialInput
-            // 
-            this.materialInput.Font = new System.Drawing.Font("Rockwell", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialInput.FormattingEnabled = true;
-            this.materialInput.Items.AddRange(new object[] {
-            "Oak",
-            "Laminate",
-            "Pine",
-            "Rosewood",
-            "Veneer"});
-            this.materialInput.Location = new System.Drawing.Point(211, 159);
-            this.materialInput.Name = "materialInput";
-            this.materialInput.Size = new System.Drawing.Size(121, 24);
-            this.materialInput.TabIndex = 11;
             // 
             // label6
             // 
@@ -208,11 +200,29 @@
             this.rushOrderInput.Items.AddRange(new object[] {
             "3 Day",
             "5 Day",
-            "7 Day"});
+            "7 Day",
+            "14 Day"});
             this.rushOrderInput.Location = new System.Drawing.Point(211, 198);
             this.rushOrderInput.Name = "rushOrderInput";
             this.rushOrderInput.Size = new System.Drawing.Size(121, 24);
-            this.rushOrderInput.TabIndex = 13;
+            this.rushOrderInput.TabIndex = 6;
+            this.rushOrderInput.Validating += new System.ComponentModel.CancelEventHandler(this.ComboBoxInput_Validating);
+            // 
+            // widthInput
+            // 
+            this.widthInput.Location = new System.Drawing.Point(211, 42);
+            this.widthInput.Name = "widthInput";
+            this.widthInput.Size = new System.Drawing.Size(120, 20);
+            this.widthInput.TabIndex = 2;
+            this.widthInput.Validating += new System.ComponentModel.CancelEventHandler(this.NumericInput_Validating);
+            // 
+            // depthInput
+            // 
+            this.depthInput.Location = new System.Drawing.Point(211, 81);
+            this.depthInput.Name = "depthInput";
+            this.depthInput.Size = new System.Drawing.Size(120, 20);
+            this.depthInput.TabIndex = 3;
+            this.depthInput.Validating += new System.ComponentModel.CancelEventHandler(this.NumericInput_Validating);
             // 
             // label3
             // 
@@ -252,7 +262,7 @@
             this.addNewQuote.TabIndex = 9;
             this.addNewQuote.Text = "Get Quote";
             this.addNewQuote.UseVisualStyleBackColor = false;
-            this.addNewQuote.Click += new System.EventHandler(this.addNewQuote_Click);
+            this.addNewQuote.Click += new System.EventHandler(this.AddNewQuote_Click);
             // 
             // errorProvider1
             // 
@@ -262,6 +272,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.addNewQuote);
             this.Controls.Add(this.label7);
@@ -271,6 +282,8 @@
             this.Text = "Add a New Quote";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.widthInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.depthInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -283,12 +296,9 @@
         private System.Windows.Forms.TextBox customerNameInput;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox widthInput;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox depthInput;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox drawersInput;
-        private System.Windows.Forms.ComboBox materialInput;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox rushOrderInput;
@@ -296,5 +306,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button addNewQuote;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ComboBox materialInput;
+        private System.Windows.Forms.NumericUpDown widthInput;
+        private System.Windows.Forms.NumericUpDown depthInput;
     }
 }

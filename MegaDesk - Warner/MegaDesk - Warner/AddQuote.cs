@@ -10,27 +10,39 @@ namespace MegaDesk___Warner
         public AddQuote()
         {
             InitializeComponent();
-
-            depthInput.KeyPress += new KeyPressEventHandler(keyPressed);
+            PopulateComboBoxes();
+            SetDefaultValues();
         }
 
-        private void addNewQuote_Click(object sender, EventArgs e)
+        private void PopulateComboBoxes()
         {
-            //getting form inputs
+            materialInput.DataSource = Enum.GetValues(typeof(SurfaceMaterial));
+            rushOrderInput.DataSource = Enum.GetValues(typeof(RushOptions));
+        }
 
+        private void SetDefaultValues()
+        {
+            drawersInput.SelectedIndex = 0;
+            rushOrderInput.SelectedIndex = 3;
+        }
+
+        private void AddNewQuote_Click(object sender, EventArgs e)
+        {
+            if (!this.ValidateChildren()) return;
+            //getting form inputs
             var name = customerNameInput.Text;
-            var width = Convert.ToDouble(widthInput.Text);
-            var depth = Convert.ToDouble(depthInput.Text);
+            var width = Convert.ToDouble(widthInput.Value);
+            var depth = Convert.ToDouble(depthInput.Value);
 
             //getting combo-box inputs, 
             int.TryParse(drawersInput.SelectedItem.ToString(), out var drawers);
             Enum.TryParse(materialInput.SelectedItem.ToString(), out SurfaceMaterial surfaceMaterial);
-
-            //rushOptions combo-box
             Enum.TryParse(rushOrderInput.SelectedItem.ToString(), out RushOptions rushOptions);
 
+            //creating desk, quote and saving quote
             var desk = new Desk(width, depth, drawers, surfaceMaterial, rushOptions);
             var quote = new DeskQuote(desk, name);
+            DeskQuote.SaveQuote(quote);
 
             //saving data so it's available in DisplayQuote form
             FormData = quote;
@@ -40,61 +52,68 @@ namespace MegaDesk___Warner
             var displayQuote = new DisplayQuote();
             displayQuote.Show();
         }
-
+            
         //validators
-        private void widthInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void NameInputValidating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var isDouble = Double.TryParse(widthInput.Text, out double width);
-            if (!isDouble)
+            if (string.IsNullOrEmpty(customerNameInput.Text))
             {
                 e.Cancel = true;
-                widthInput.Focus();
-                errorProvider1.SetError(widthInput, "Please enter a number");
+                customerNameInput.Focus();
+                errorProvider1.SetError(customerNameInput, "Please enter a user name");
             }
 
-            if (width < Desk.WIDTH_MIN || width > Desk.WIDTH_MAX)
+            else
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(customerNameInput, "");
+            }
+        }
+        private void NumericInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var inputName = (NumericUpDown) sender;
+            var dimension = inputName.Name.Contains("depth") ? "depth" : "width";
+            var min = dimension == "width" ? Desk.WidthMin : Desk.DepthMin; 
+            var max = dimension == "width" ? Desk.WidthMax : Desk.DepthMax;
+            double number = 0;
+            try
+            {
+                number = decimal.ToDouble(inputName.Value);
+            }
+            catch (Exception)
             {
                 e.Cancel = true;
-                widthInput.Focus();
-                errorProvider1.SetError(widthInput,
-                    $"Please enter a number between {Desk.WIDTH_MIN} and {Desk.WIDTH_MAX}");
+                inputName.Focus();
+                errorProvider1.SetError(inputName, "Please enter a number");
+            }
+            
+            if (number < min || number > max)
+            {
+                e.Cancel = true;
+                inputName.Focus();
+                errorProvider1.SetError(inputName,
+                    $"Please enter a number between {min} and {max}");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider1.SetError(widthInput, "");
+                errorProvider1.SetError(inputName, "");
             }
         }
 
-        private void depthInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ComboBoxInput_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var isDouble = Double.TryParse(depthInput.Text, out double depth);
-            if (!isDouble)
+            var inputName = (ComboBox)sender;
+            if (inputName.SelectedItem == null)
             {
                 e.Cancel = true;
-                depthInput.Focus();
-                errorProvider1.SetError(depthInput, "Please enter a number");
-            }
-
-            if (depth < Desk.DEPTH_MIN || depth > Desk.DEPTH_MAX)
-            {
-                e.Cancel = true;
-                depthInput.Focus();
-                errorProvider1.SetError(depthInput,
-                    $"Please enter a number between {Desk.DEPTH_MIN} and {Desk.DEPTH_MAX}");
+                inputName.Focus();
+                errorProvider1.SetError(inputName, "Selection is required");
             }
             else
             {
                 e.Cancel = false;
-                errorProvider1.SetError(depthInput, "");
-            }
-        }
-        private void keyPressed(Object o, KeyPressEventArgs e)
-        {
-            //char character = e.KeyChar;
-            if ((char.IsControl(e.KeyChar) || !char.IsDigit(e.KeyChar)) && e.KeyChar != (char)Keys.Back)
-            {
-                e.KeyChar = (char) 0;
+                errorProvider1.SetError(inputName, "");
             }
         }
     }

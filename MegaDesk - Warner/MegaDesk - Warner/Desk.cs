@@ -2,25 +2,29 @@
 {
     internal class Desk
     {
-        public double Width { get; set; }
-        public double Depth { get; set; }
-        public int Drawers { get; set; }
+        public double Width { get; }
+        public double Depth { get; }
+
+        public double Area { get; }
+
+        public int Drawers { get; }
         public SurfaceMaterial SurfaceMaterial { get; set; }
         public RushOptions RushOptions { get; set; }
 
-        public const double DEPTH_MAX = 48;
-        public const double DEPTH_MIN = 12;
-        public const double WIDTH_MAX = 96;
-        public const double WIDTH_MIN = 24;
+        public const double DepthMax = 48;
+        public const double DepthMin = 12;
+        public const double WidthMax = 96;
+        public const double WidthMin = 24;
 
         public Desk(double width, double depth, int drawers, SurfaceMaterial surfaceMaterial, RushOptions rushOptions)
 
         {
-            this.Width = width;
-            this.Depth = depth;
-            this.Drawers = drawers;
-            this.SurfaceMaterial = surfaceMaterial;
-            this.RushOptions = rushOptions;
+            Width = width;
+            Depth = depth;
+            Area = width * depth;
+            Drawers = drawers;
+            SurfaceMaterial = surfaceMaterial;
+            RushOptions = rushOptions;
         }
 
     }
@@ -38,7 +42,8 @@
     {
         Three,
         Five,
-        Seven
+        Seven,
+        Fourteen
 
     }
 }

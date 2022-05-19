@@ -8,6 +8,7 @@ namespace MegaDesk___Warner
         public MainMenu()
         {
             InitializeComponent();
+            DeskQuote.LoadSavedQuotes();
         }
 
         private void addNewQuote_Click(object sender, EventArgs e)
