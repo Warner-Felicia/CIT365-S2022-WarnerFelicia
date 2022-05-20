@@ -28,7 +28,7 @@ namespace MegaDesk___Warner
             //get selected material
             var material = materialInput.SelectedItem.ToString();
             //loop through the saved quotes to find matches
-            foreach (var quote in DeskQuote.AllQuotes.Where(quote => material == quote.Desk.SurfaceMaterial.ToString()))
+            foreach (var quote in SavedQuoteList.SavedQuotes.Where(quote => material == quote.Desk.SurfaceMaterial.ToString()))
             {
                 //add new row for successful match with required column data
                 quoteSearchResults.Rows.Add(quote.CustomerName, quote.Date.ToString("MM/dd/yyyy"), quote.Desk.Width, quote.Desk.Depth,

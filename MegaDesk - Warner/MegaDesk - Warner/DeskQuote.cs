@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace MegaDesk___Warner
 {
-    internal class DeskQuote
+    public class DeskQuote
     {
         public string CustomerName { get; }
         public Desk Desk;
@@ -124,13 +124,7 @@ namespace MegaDesk___Warner
             File.WriteAllText("quotes.json", serializedQuotes);
             }
 
-        public static void LoadSavedQuotes()
-        {
-            var serializedQuotes = File.ReadAllText("quotes.json");
-            AllQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(serializedQuotes);
-
-
-        }
+        
     }
            
 

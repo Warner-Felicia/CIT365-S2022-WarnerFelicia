@@ -21,7 +21,7 @@ namespace MegaDesk___Warner
         private void PopulateDateGridView()
         {
             //getting saved quotes
-            var quotes = DeskQuote.AllQuotes;
+            var quotes = SavedQuoteList.SavedQuotes;
             
             //looping through quotes and adding new row for each with selected data
             foreach (var quote in quotes)

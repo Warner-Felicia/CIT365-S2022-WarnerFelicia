@@ -1,6 +1,6 @@
 ﻿namespace MegaDesk___Warner
 {
-    internal class Desk
+    public class Desk
     {
         public double Width { get; }
         public double Depth { get; }
@@ -29,7 +29,7 @@
 
     }
 
-    internal enum SurfaceMaterial
+    public enum SurfaceMaterial
     {
         Oak = 200,
         Laminate = 100,
@@ -38,7 +38,7 @@
         Veneer = 125
     }
 
-    enum RushOptions
+    public enum RushOptions
     {
         Three,
         Five,
