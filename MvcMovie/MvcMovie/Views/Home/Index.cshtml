@@ -1,0 +1,23 @@
+﻿@model MvcMovie.ViewModels.MovieGenreViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">LDS Movies</h1>
+    <div class="movieGrid">
+        @foreach (var movie in Model.Movies)
+        {
+            <div class="card">
+                <a asp-controller="Movies"asp-action="Details" asp-route-id="@movie.Id">
+                    <div class="picContainer">
+                        <img class="movieLink" src="~/images/@movie.PhotoPath" alt="@movie.Title"/>
+                    </div>
+                </a>
+                <a asp-controller="Movies"asp-action="Details" asp-route-id="@movie.Id">
+                    <h2 class="btn">See Details...</h2>
+                </a>
+            </div>
+        }
+            </div>
+</div>

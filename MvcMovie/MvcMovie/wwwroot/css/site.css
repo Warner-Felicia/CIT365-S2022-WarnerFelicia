@@ -1,0 +1,44 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.movieGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 250px));
+    grid-gap: 20px;
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 35px;
+}
+
+.movieGrid h2 {
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.movieGrid .card {
+    border: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.movieGrid .movieLink {
+    width: 100%;
+}
