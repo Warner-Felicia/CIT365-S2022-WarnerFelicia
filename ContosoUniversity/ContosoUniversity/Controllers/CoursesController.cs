@@ -105,7 +105,8 @@ namespace ContosoUniversity.Controllers
 
             var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(c => c.CourseID == id);
 
-            if (await TryUpdateModelAsync<Course>(courseToUpdate, "", c => c.Credits, c => c.DepartmentID, c => c.Title))
+            if (await TryUpdateModelAsync<Course>(courseToUpdate, "", c => c.Credits, c => c.DepartmentID,
+                    c => c.Title))
             {
                 try
                 {
@@ -118,6 +119,7 @@ namespace ContosoUniversity.Controllers
                                                  "Try again, and if the problem persists, " +
                                                  "see your system administrator.");
                 }
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -163,6 +165,25 @@ namespace ContosoUniversity.Controllers
             _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult UpdateCourseCredits()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateCourseCredits(int? multiplier)
+        {
+            if (multiplier != null)
+            {
+                ViewData["RowsAffected"] =
+                    await _context.Database.ExecuteSqlRawAsync(
+                        "UPDATE Course SET Credits = Credits * {0}",
+                        parameters: multiplier);
+            }
+
+            return View();
         }
     }
 }
