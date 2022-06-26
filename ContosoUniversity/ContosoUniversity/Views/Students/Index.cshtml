@@ -1,13 +1,13 @@
 ﻿@model PaginatedList<ContosoUniversity.Models.Student>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Students";
 }
 
-<h1>Index</h1>
+<h1 class="tagline">Students</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn" asp-action="Create">Create New</a>
 </p>
 
 <form asp-action="Index" method="get">
@@ -20,7 +20,7 @@
     </div>
 </form>
 
-<table class="table">
+<table class="table data">
     <thead>
     <tr>
         <th>

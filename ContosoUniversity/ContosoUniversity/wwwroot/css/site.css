@@ -59,8 +59,9 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family: 'Josefin Sans', sans-serif;
 }
 .footer {
   position: absolute;
@@ -70,6 +71,117 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-.jumbotron {
-    background-image: url(~/images/university-jumbotron.jpg);
+h1 {
+    font-family: 'Playfair Display', serif;
 }
+
+.btn {
+    background-color: #2A5559;
+    border-radius: 3px;
+    text-align: center;
+    color: white;
+}
+
+    .btn:hover {
+        background-color: white;
+        border-radius: 3px;
+        text-align: center;
+        color: #2A5559;
+        border: 1px solid #2A5559;
+    }
+
+.btn-danger {
+    border-radius: 3px;
+}
+
+.navbar {
+    font-family: 'Playfair Display', serif;
+}
+
+.jumbotron {
+    background-image: url("../images/university-jumbotron.jpg");
+    background-size: cover;
+}
+
+    .jumbotron h1 {
+        color: #0D1526;
+        background-color: rgba(173, 188, 217, .8);
+        display: inline-block;
+        margin-top: 150px;
+        padding: 5px;
+        border-radius: 3px;
+        font-size: 3rem;
+        font-family: 'Playfair Display', serif;
+    }
+
+.data th {
+    background-color: #2A5559;
+    color: white;
+}
+
+.data th a {
+    color: white;
+}
+
+.data tr:nth-of-type(odd) {
+    background-color: rgba(42, 85, 89, .1);
+}
+
+.tagline {
+    text-align: center;
+    color: white;
+    background-color: #0D1526;
+    padding: 20px;
+    border-radius: 3px;
+    margin-top: 40px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 50px;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 800px;
+}
+
+.card-item {
+    background-color: #2A5559;
+    border-radius: 3px;
+    text-align: center;
+    padding: 30px 0;
+    color: white;
+}
+
+.card-item a {
+    color: inherit;
+}
+
+.card-item h2 {
+    font-size: 2.25rem;
+}
+
+.card-item:hover {
+    color: #2A5559;
+    border: 1px solid #2A5559;
+    background-color: white;
+}
+
+.statistics-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.statistics {
+    width: 50%;
+    min-width: 400px;
+    margin: 20px 20px 0 0 ;
+}
+
+
+
+
+
+
+

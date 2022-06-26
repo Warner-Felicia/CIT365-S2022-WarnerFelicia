@@ -4,28 +4,37 @@
 @{
     ViewData["Title"] = "Student Body Statistics";
 }
+<style type="text/css">.statistics-container { }</style>
 
-<h2>Student Body Statistics</h2>
+<h2 class="tagline">Student Body Statistics</h2>
 
-<table>
-    <tr>
-        <th>
-            Enrollment Date
-        </th>
-        <th>
-            Students
-        </th>
-    </tr>
-    
-    @foreach (var item in Model)
-    {
+<div class="statistics-container">
+    <table class="table data statistics">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EnrollmentDate)
-            </td>
-            <td>
-                @item.StudentCount
-            </td>
+            <th>
+                Enrollment Date
+            </th>
+            <th>
+                Students
+            </th>
         </tr>
-    }
-</table>
+        
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                </td>
+                <td>
+                    @item.StudentCount
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        <h2>Data Prepared and Updated By:</h2>
+        <p>Felicia Warner</p>
+        <p>703 Mossburn Court</p>
+        <p>Fuquay Varina, North Carolina</p>
+    </div>
+</div>
