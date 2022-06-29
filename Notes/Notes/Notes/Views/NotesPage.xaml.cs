@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Notes.Models;
 using Xamarin.Forms;
 
@@ -14,28 +15,12 @@ namespace Notes.Views
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             
-            var notes = new List<Note>();
-
-            //Create a Note object from each file
-            var files = Directory.EnumerateFiles(App.FolderPath, "*.notes.txt");
-            foreach (var filename in files)
-            {
-                notes.Add(new Note
-                {
-                    Filename = filename,
-                    Text = File.ReadAllText(filename),
-                    Date = File.GetCreationTime(filename)
-                });
-            }
-
-            // set the data source for the CollectionView to a sorted collection of notes
-            collectionView.ItemsSource = notes
-                .OrderBy(d => d.Date)
-                .ToList();
+            // Retrieve all the notes from the database, and se them as the data source for the CollectionView
+            collectionView.ItemsSource = await App.Database.GetNotesAsync();
         }
 
         async void OnAddClicked(object sender, EventArgs e)
@@ -49,9 +34,9 @@ namespace Notes.Views
         {
             if (e.CurrentSelection != null)
             {
-                // Navigate to the NoteEntryPage, passing the filename as a query parameter
+                // Navigate to the NoteEntryPage, passing the ID as a query parameter
                 Note note = (Note)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync($"{nameof(NoteEntryPage)}?{nameof(NoteEntryPage.ItemId)}={note.Filename}");
+                await Shell.Current.GoToAsync($"{nameof(NoteEntryPage)}?{nameof(NoteEntryPage.ItemId)}={note.ID.ToString()}");
             }
         }
     }
