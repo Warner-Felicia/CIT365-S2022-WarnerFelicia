@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Collections.Specialized
 @model MyScriptureJournal.Pages.Scriptures.IndexModel
 
 @{
@@ -19,34 +20,34 @@
         <input type="submit" value="Filter"/>
     </p>
 </form>
-<table class="table">
+<table class="table" id="scriptureTable">
     <thead>
-        <tr>
-            <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.BookSort">
-                    @Html.DisplayNameFor(model => model.Scripture[0].Book)
-                </a>
+    <tr>
+        <th>
+            <a asp-page="./Index" asp-route-sortOrder="@Model.BookSort">
+                @Html.DisplayNameFor(model => model.Scripture[0].Book)
+            </a>
                 
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Scripture[0].Chapter)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Scripture[0].Verse)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Scripture[0].Note)
-            </th>
-            <th>
-                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
-                    @Html.DisplayNameFor(model => model.Scripture[0].Date)
-                </a>
-            </th>
-            <th></th>
-        </tr>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Scripture[0].Chapter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Scripture[0].Verse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Scripture[0].Note)
+        </th>
+        <th>
+            <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                @Html.DisplayNameFor(model => model.Scripture[0].Date)
+            </a>
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Scripture) {
+    @foreach (var item in Model.Scripture) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Book)
@@ -68,7 +69,23 @@
                 <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
             </td>
+           
         </tr>
-}
+    }
+    <button id="printPDF">Print</button>
     </tbody>
 </table>
+
+@section scripts {
+    <script>
+        var button = document.querySelector('#printPDF');
+        button.addEventListener('click', print);
+
+        function print() {
+            var element = document.querySelector('#scriptureTable');
+            html2pdf(element);
+        }
+        
+
+    </script>
+}
